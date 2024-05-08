@@ -17,6 +17,7 @@ namespace RandomMoons.ConfigUtils
     /// </summary>
     [KnownType(typeof(MoonSelection))]
     [DataContract]
+    [Obsolete]
     public class SyncConfig : SyncedConfig<SyncConfig>
     {
 
