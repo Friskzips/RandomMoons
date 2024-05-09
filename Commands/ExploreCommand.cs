@@ -34,8 +34,10 @@ namespace RandomMoons.Commands
                 return null;
             }
             if (s.ToLower() == "c" || s.ToLower() == "confirm") // If the player confirms the interaction
-            {
-                if (States.hasGambled && SyncConfig.Instance.RestrictedCommandUsage.Value) // If the ship already explored
+
+            {   
+                //TODO: redo the way the config works
+                if (States.hasGambled) // && SyncConfig.Instance.RestrictedCommandUsage.Value) // If the ship already explored
                 {
                     return "You have already explored. Please land before exploring once again !";
                 }
@@ -44,9 +46,15 @@ namespace RandomMoons.Commands
                     return "Please wait before travelling to a new moon !";
                 }
                 SelectableLevel moon = chooseRandomMoon(terminal.moonsCatalogueList); // Choose a random moon amongst the moons shown in terminal
-                if (SyncConfig.Synced && SyncConfig.IsClient) { RandomMoons.mls.LogInfo("Config synced with host"); }
+
+                // TODO: redo the way the config works below 
+
+                //if (SyncConfig.Synced && SyncConfig.IsClient) { RandomMoons.mls.LogInfo("Config synced with host"); }
+
                 StartOfRound.Instance.ChangeLevelServerRpc(moon.levelID, terminal.groupCredits); // Travel to the chosen moon, at no cost
-                if (SyncConfig.Instance.AutoStart.Value) { States.startUponArriving = true; } // If AutoStart enabled, tell StartOfRoundPatch to start a level asap
+
+                //if (SyncConfig.Instance.AutoStart.Value) { States.startUponArriving = true; } // If AutoStart enabled, tell StartOfRoundPatch to start a level asap
+
                 States.lastVisitedMoon = moon.PlanetName;
                 States.isInteracting = false; // End of interaction
                 States.hasGambled = true;
@@ -73,6 +81,9 @@ namespace RandomMoons.Commands
             Random random = new Random();
             int moonIndex = random.Next(0, moons.Length);
 
+            // TODO: redo the way the config works
+
+            /*
             // Checks moon selection config entry
             if (SyncConfig.Instance.MoonSelectionType.Value == MoonSelection.VANILLA && !isMoonVanilla(moons[moonIndex]) || SyncConfig.Instance.MoonSelectionType.Value == MoonSelection.MODDED && isMoonVanilla(moons[moonIndex]))
             {
@@ -84,6 +95,7 @@ namespace RandomMoons.Commands
             {
                 return chooseRandomMoon(moons);
             }
+            */
 
             // Reset visitedMoons list if all the moons have been visited
             if (States.visitedMoons.Count == moons.Length)
