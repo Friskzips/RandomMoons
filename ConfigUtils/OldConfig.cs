@@ -19,7 +19,7 @@ namespace RandomMoons.ConfigUtils
     [KnownType(typeof(MoonSelection))]
     [DataContract]
     [Obsolete]
-    public class SyncConfig : SyncedConfig<SyncConfig>
+    public class SyncConfig2 : SyncedConfig<SyncConfig>
     {
 
         // Config entries (using CSync prebuilt entry class)
@@ -30,7 +30,7 @@ namespace RandomMoons.ConfigUtils
         [DataMember] public SyncedEntry<MoonSelection> MoonSelectionType { get; private set; }
 
         // Constructor (binds the entries and build mod config page for LethalConfig and LethalSettings)
-        public SyncConfig(ConfigFile cfg) : base(RandomMoons.modGUID)
+        public SyncConfig2(ConfigFile cfg) : base(RandomMoons.modGUID)
         {
 
             // Register this config for CSync to bless it with their magic man's magic words

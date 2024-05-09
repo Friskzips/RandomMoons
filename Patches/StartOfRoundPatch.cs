@@ -48,7 +48,8 @@ namespace RandomMoons.Patches
 
             if (StartOfRound.Instance.CanChangeLevels() && States.exploreASAP) // Performs auto explore
             {
-                if (SyncConfig.Instance.AutoStart.Value) { States.startUponArriving = true; } // Checks AutoStart
+                // TODO: redo the way the configs works
+                if (SyncConfig.AutoStart.Value) { States.startUponArriving = true; } // Checks AutoStart
                 if (TimeOfDay.Instance.daysUntilDeadline > 0 || StartOfRound.Instance.currentLevelID == States.companyBuildingLevelID) // If there are more than 0 days left, perform the same as explore command, else travel to Gordion (Company Building)
                 {
                     SelectableLevel moon = ExploreCommand.chooseRandomMoon(terminal.moonsCatalogueList);

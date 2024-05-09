@@ -35,9 +35,9 @@ namespace RandomMoons.Commands
             }
             if (s.ToLower() == "c" || s.ToLower() == "confirm") // If the player confirms the interaction
 
-            {   
-                //TODO: redo the way the config works
-                if (States.hasGambled) // && SyncConfig.Instance.RestrictedCommandUsage.Value) // If the ship already explored
+            {
+                // TODO: redo the way the config works below
+                if (States.hasGambled && SyncConfig.RestrictedCommandUsage.Value) // If the ship already explored
                 {
                     return "You have already explored. Please land before exploring once again !";
                 }
@@ -53,7 +53,7 @@ namespace RandomMoons.Commands
 
                 StartOfRound.Instance.ChangeLevelServerRpc(moon.levelID, terminal.groupCredits); // Travel to the chosen moon, at no cost
 
-                //if (SyncConfig.Instance.AutoStart.Value) { States.startUponArriving = true; } // If AutoStart enabled, tell StartOfRoundPatch to start a level asap
+                if (SyncConfig.AutoStart.Value) { States.startUponArriving = true; } // If AutoStart enabled, tell StartOfRoundPatch to start a level asap
 
                 States.lastVisitedMoon = moon.PlanetName;
                 States.isInteracting = false; // End of interaction
@@ -83,19 +83,19 @@ namespace RandomMoons.Commands
 
             // TODO: redo the way the config works
 
-            /*
+            
             // Checks moon selection config entry
-            if (SyncConfig.Instance.MoonSelectionType.Value == MoonSelection.VANILLA && !isMoonVanilla(moons[moonIndex]) || SyncConfig.Instance.MoonSelectionType.Value == MoonSelection.MODDED && isMoonVanilla(moons[moonIndex]))
+            if (SyncConfig.MoonSelectionType.Value == MoonSelection.VANILLA && !isMoonVanilla(moons[moonIndex]) || SyncConfig.MoonSelectionType.Value == MoonSelection.MODDED && isMoonVanilla(moons[moonIndex]))
             {
                 return chooseRandomMoon(moons);
             }
 
             // Checks the register travels config entry
-            if (SyncConfig.Instance.CheckIfVisitedDuringQuota.Value && States.visitedMoons.Contains(moons[moonIndex].PlanetName))
+            if (SyncConfig.CheckIfVisitedDuringQuota.Value && States.visitedMoons.Contains(moons[moonIndex].PlanetName))
             {
                 return chooseRandomMoon(moons);
             }
-            */
+            
 
             // Reset visitedMoons list if all the moons have been visited
             if (States.visitedMoons.Count == moons.Length)

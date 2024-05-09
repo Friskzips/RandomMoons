@@ -7,6 +7,7 @@ using RandomMoons.Commands;
 using RandomMoons.Patches;
 using RandomMoons.ConfigUtils;
 using System.Runtime.Serialization;
+using CSync;
 
 namespace RandomMoons
 {
@@ -15,7 +16,7 @@ namespace RandomMoons
     /// </summary>
     [BepInPlugin(modGUID, modName, modVersion)]
     [BepInDependency("LethalAPI.Terminal")] // TODO: update version Thunderstore mod id : LethalAPI-LethalAPI_Terminal-1.0.1
-    [BepInDependency("com.sigurd.csync")] // TODO : update version Thunderstore mod id : Sigurd-CSync-3.1.1
+    [BepInDependency("io.github.CSync")]
     [BepInDependency("ainavt.lc.lethalconfig", BepInDependency.DependencyFlags.SoftDependency)] // TODO: update version Thunderstore mod id : AinaVT-LethalConfig-1.3.4
     [BepInDependency("com.willis.lc.lethalsettings", BepInDependency.DependencyFlags.SoftDependency)] // TODO: update version Thunderstore mod id : willis81808-LethalSettings-1.4.0
     public class RandomMoons : BaseUnityPlugin
@@ -36,10 +37,11 @@ namespace RandomMoons
 
         // Config Instance
         // TODO: change the way the config works
-        //public static SyncConfig CustomConfig;
+        public static SyncConfig CustomConfig;
 
         // Log Source Instance
         internal static ManualLogSource mls;
+
 
         //Executed at start
         private void Awake()
@@ -68,8 +70,12 @@ namespace RandomMoons
             // Registers the commands
             Commands.RegisterFrom(new ExploreCommand());
 
+            //Init the config
+            CustomConfig = new(base.Config);
+
             // Plugin loaded !
             mls.LogInfo("RandomMoons is operational !");
+        
             
         }
 
