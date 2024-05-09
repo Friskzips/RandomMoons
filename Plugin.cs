@@ -41,6 +41,8 @@ namespace RandomMoons
         // Log Source Instance
         internal static ManualLogSource mls;
 
+        //Logger try
+        internal new static ManualLogSource Logger;
 
         //Executed at start
         private void Awake()
@@ -54,14 +56,20 @@ namespace RandomMoons
             {
                 Instance = this;
             }
-
-            // Instantiates the Log Source
+            
+            // Instantiates the Log Source. Old one. Please dont use it
             mls = BepInEx.Logging.Logger.CreateLogSource(modGUID);
 
+            // New and better log source
+            Logger = base.Logger;
+
+
+
+
             // Loads Patches
-            mls.LogInfo("Loading patches...");
+            Logger.LogInfo("Loading Patches...");
             ApplyPluginPatches();
-            mls.LogInfo("Patches loaded !");
+            Logger.LogInfo("Patches loaded !");
 
             // Instantiates the Terminal API Registry
             Commands = TerminalRegistry.CreateTerminalRegistry();
@@ -73,7 +81,7 @@ namespace RandomMoons
             CustomConfig = new(base.Config);
 
             // Plugin loaded !
-            mls.LogInfo("RandomMoons is operational !");
+            Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded and operational ! Have fun");
         
             
         }
