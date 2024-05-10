@@ -8,7 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using BepInEx.Logging;
 
 namespace RandomMoons.ConfigUtils
-{
+{/*
      internal class SyncedInstancied
       {
           [Serializable]
@@ -28,9 +28,7 @@ namespace RandomMoons.ConfigUtils
               public static bool Synced { get; internal set; }
 
 
-            internal static ManualLogSource Logger;
-
-              protected void InitInstance(T instance)
+              public virtual void InitInstance(T instance)
               {
 
                   Default = instance;

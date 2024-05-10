@@ -2,9 +2,9 @@
 using BepInEx.Configuration;
 using CSync.Extensions;
 using CSync.Lib;
-using CSync.Util;
 using LethalConfig;
 using LethalConfig.ConfigItems;
+using LethalConfig.ConfigItems.Options;
 using LethalSettings.UI;
 using LethalSettings.UI.Components;
 using System;
@@ -13,9 +13,7 @@ using System.Runtime.Serialization;
 
 namespace RandomMoons.ConfigUtils
 {
-    [DataContract]
-    [Obsolete]
-    public class SyncConfig : SyncedConfig<SyncConfig>
+    public class SyncConfig : SyncedConfig2<SyncConfig>
     {
         //Basic config stuff
 
@@ -35,14 +33,12 @@ namespace RandomMoons.ConfigUtils
         public static ConfigEntry<MoonSelection> MoonSelectionType;
 
         //Variable to try and sync
-        [DataMember] public SyncedEntry<float> Synced_var { get; private set; }
+       [field : SyncedEntryField] public static SyncedEntry<int> Synced_var { get; private set; }
 
-
+        [Obsolete]
         //Binding the configs
         public SyncConfig(ConfigFile cfg) :  base(PluginInfo.PLUGIN_GUID)
         {
-            //Please work Csync
-            ConfigManager.Register(this);
 
             // Entry binding
             AutoStart = cfg.Bind(
@@ -79,13 +75,25 @@ namespace RandomMoons.ConfigUtils
                     MoonSelection.ALL,
                     "Can have three values : vanilla, modded or all, to change the moons that can be chosen. (Note : modded input without modded moons would do the same as all)"
                 );
-
+            
             //Synced variable try
             Synced_var = cfg.BindSyncedEntry(
-                "General",
-                "Synced_var",
-                4.1f,
-                "Please be synced for the love of god");
+                new ConfigDefinition("Please work", "Please work2"),
+                4,
+                new ConfigDescription("Please be synced for the love of god")
+                );
+
+            var configEntry = cfg.Bind("General", "Example", 0, "This is an example component!");
+
+            var Synced_var_input = new IntSliderConfigItem(Synced_var.Entry, new IntSliderOptions
+            {
+                RequiresRestart = false,
+                Min = 0,
+                Max = 100
+            } );
+            LethalConfigManager.AddConfigItem(Synced_var_input);
+
+            ConfigManager.Register(this);
         }
 
     }
