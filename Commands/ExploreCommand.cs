@@ -8,7 +8,7 @@ using RandomMoons.Utils;
 
 namespace RandomMoons.Commands;
 
- /// <summary>
+/// <summary>
 /// The main command, explore
 /// </summary>
 public class ExploreCommand
@@ -29,23 +29,27 @@ public class ExploreCommand
         {
             States.closedUponConfirmation = false;
             States.isInteracting = false; // End of interaction
+
             terminal.currentNode = new TerminalNode() { name = s };
             terminal.OnSubmit();
+
             return null;
         }
-        if (s.ToLower() == "c" || s.ToLower() == "confirm") // If the player confirms the interaction
 
+        if (s.ToLower() == "c" || s.ToLower() == "confirm") // If the player confirms the interaction
         {
             // TODO: redo the way the config works below
             if (States.hasGambled && SyncConfig.RestrictedCommandUsage.Value) // If the ship already explored
             {
                 return "You have already explored. Please land before exploring once again !";
             }
+
             if (StartOfRound.Instance.shipHasLanded || !StartOfRound.Instance.CanChangeLevels()) // If the ship cannot travel
             {
                 return "Please wait before travelling to a new moon !";
             }
-            SelectableLevel moon = chooseRandomMoon(terminal.moonsCatalogueList); // Choose a random moon amongst the moons shown in terminal
+
+            SelectableLevel moon = ChooseRandomMoon(terminal.moonsCatalogueList); // Choose a random moon amongst the moons shown in terminal
 
             // TODO: redo the way the config works below 
 
@@ -71,40 +75,42 @@ public class ExploreCommand
             States.isInteracting = false; // End of interaction
             terminal.currentNode = new TerminalNode() { name = s };
             terminal.OnSubmit();
+
             return null;
         }
     }
 
     // Choose a random moon in a moon list
-    public static SelectableLevel chooseRandomMoon(SelectableLevel[] moons)
+    public static SelectableLevel ChooseRandomMoon(SelectableLevel[] moons)
     {
         Random random = new();
         int moonIndex = random.Next(0, moons.Length);
 
         // TODO: redo the way the config works
 
-            
+        var type = SyncConfig.MoonSelectionType.Value;
+
         // Checks moon selection config entry
-        if (SyncConfig.MoonSelectionType.Value == MoonSelection.VANILLA && !isMoonVanilla(moons[moonIndex]) || SyncConfig.MoonSelectionType.Value == MoonSelection.MODDED && isMoonVanilla(moons[moonIndex]))
+        if (type == MoonSelection.VANILLA && !IsMoonVanilla(moons[moonIndex]) || type == MoonSelection.MODDED && IsMoonVanilla(moons[moonIndex]))
         {
-            return chooseRandomMoon(moons);
+            return ChooseRandomMoon(moons);
         }
 
         // Checks the register travels config entry
         if (SyncConfig.CheckIfVisitedDuringQuota.Value && States.visitedMoons.Contains(moons[moonIndex].PlanetName))
         {
-            return chooseRandomMoon(moons);
+            return ChooseRandomMoon(moons);
         }
             
-
         // Reset visitedMoons list if all the moons have been visited
         if (States.visitedMoons.Count == moons.Length)
         {
             States.visitedMoons = [];
         }
+
         return moons[moonIndex];
     }
 
     // Checks if a moon is in the vanillaMoon list
-    public static bool isMoonVanilla(SelectableLevel moon) { return States.vanillaMoons.Contains(moon.sceneName); }
+    public static bool IsMoonVanilla(SelectableLevel moon) => States.vanillaMoons.Contains(moon.sceneName);
 }

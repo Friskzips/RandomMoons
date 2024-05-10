@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace RandomMoons.Patches;
 
- /// <summary>
+/// <summary>
 /// Patches StartOfRound. Learn to read
 /// </summary>
 [HarmonyPatch(typeof(StartOfRound))]
