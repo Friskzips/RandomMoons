@@ -18,6 +18,7 @@ namespace RandomMoons
     [BepInDependency("LethalAPI.Terminal")] // TODO: update version Thunderstore mod id : LethalAPI-LethalAPI_Terminal-1.0.1
     [BepInDependency("ainavt.lc.lethalconfig", BepInDependency.DependencyFlags.SoftDependency)] // TODO: update version Thunderstore mod id : AinaVT-LethalConfig-1.3.4
     [BepInDependency("com.willis.lc.lethalsettings", BepInDependency.DependencyFlags.SoftDependency)] // TODO: update version Thunderstore mod id : willis81808-LethalSettings-1.4.0
+    [BepInDependency("com.sigurd.csync", "5.0.0")]
     public class RandomMoons : BaseUnityPlugin
     {
         // Basic mod infos
@@ -36,13 +37,15 @@ namespace RandomMoons
 
         // Config Instance
         // TODO: change the way the config works
-        public static SyncConfig CustomConfig;
+        //public static SyncConfig CustomConfig;
 
         // Log Source Instance
         internal static ManualLogSource mls;
 
         //Logger try
         internal new static ManualLogSource Logger;
+
+        internal static new SyncConfig Config;
 
         //Executed at start
         private void Awake()
@@ -78,7 +81,7 @@ namespace RandomMoons
             Commands.RegisterFrom(new ExploreCommand());
 
             //Init the config
-            CustomConfig = new(base.Config);
+            Config = new SyncConfig(base.Config);
 
             // Plugin loaded !
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded and operational ! Have fun");
