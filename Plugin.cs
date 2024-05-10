@@ -19,7 +19,7 @@ namespace RandomMoons
     [BepInDependency("LethalAPI.Terminal")] // TODO: update version Thunderstore mod id : LethalAPI-LethalAPI_Terminal-1.0.1
     [BepInDependency("ainavt.lc.lethalconfig", BepInDependency.DependencyFlags.SoftDependency)] // TODO: update version Thunderstore mod id : AinaVT-LethalConfig-1.3.4
     [BepInDependency("com.willis.lc.lethalsettings", BepInDependency.DependencyFlags.SoftDependency)] // TODO: update version Thunderstore mod id : willis81808-LethalSettings-1.4.0
-    [BepInDependency("com.sigurd.csync", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("io.github.CSync")]
     public class RandomMoons : BaseUnityPlugin
     {
         // Basic mod infos

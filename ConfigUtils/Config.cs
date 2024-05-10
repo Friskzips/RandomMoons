@@ -1,7 +1,7 @@
 ﻿using BepInEx.Bootstrap;
 using BepInEx.Configuration;
-using CSync.Extensions;
 using CSync.Lib;
+using CSync.Util;
 using LethalConfig;
 using LethalConfig.ConfigItems;
 using LethalConfig.ConfigItems.Options;
@@ -13,7 +13,8 @@ using System.Runtime.Serialization;
 
 namespace RandomMoons.ConfigUtils
 {
-    public class SyncConfig : SyncedConfig2<SyncConfig>
+    [DataContract]
+    public class SyncConfig : SyncedConfig<SyncConfig>
     {
         //Basic config stuff
 
@@ -33,13 +34,13 @@ namespace RandomMoons.ConfigUtils
         public static ConfigEntry<MoonSelection> MoonSelectionType;
 
         //Variable to try and sync
-       [field : SyncedEntryField] public static SyncedEntry<int> Synced_var { get; private set; }
+       [DataMember] public static SyncedEntry<int> Synced_var { get; private set; }
 
         [Obsolete]
         //Binding the configs
-        public SyncConfig(ConfigFile cfg) :  base(PluginInfo.PLUGIN_GUID)
+        public SyncConfig(ConfigFile cfg) :  base("InnohVateur.RandomMoons")
         {
-
+            ConfigManager.Register(this);
             // Entry binding
             AutoStart = cfg.Bind(
                     "General",
@@ -93,7 +94,7 @@ namespace RandomMoons.ConfigUtils
             } );
             LethalConfigManager.AddConfigItem(Synced_var_input);
 
-            ConfigManager.Register(this);
+            
         }
 
     }

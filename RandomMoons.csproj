@@ -31,8 +31,8 @@
     <Reference Include="BepInEx">
       <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\BepInEx\core\BepInEx.dll</HintPath>
     </Reference>
-    <Reference Include="com.sigurd.csync">
-      <HintPath>..\..\..\..\DEPENDENCIES\com.sigurd.csync.dll</HintPath>
+    <Reference Include="CSync">
+      <HintPath>..\..\..\..\DEPENDENCIES\CSync.dll</HintPath>
     </Reference>
     <Reference Include="LethalAPI.Terminal">
       <HintPath>..\..\..\..\DEPENDENCIES\LethalAPI.Terminal.dll</HintPath>

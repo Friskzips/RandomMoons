@@ -19,7 +19,7 @@ namespace RandomMoons.Commands
         {
             States.isInteracting = true; // The player will need to confirm / deny
             return new TerminalInteraction() // Starts terminal interaction (confirm / deny)
-                .WithPrompt($"You're going to route to a randomly chosen moon (debug : Value is {SyncConfig.Synced_var.Entry.Value}, for free.\n\nPlease CONFIRM or DENY")
+                .WithPrompt($"You're going to route to a randomly chosen moon (If you see this, please open an issue on git hub, this is a bug : Value is {SyncConfig.Synced_var.Entry.Value}), for free.\n\nPlease CONFIRM or DENY")
                 .WithHandler(onInteraction);
             
 
