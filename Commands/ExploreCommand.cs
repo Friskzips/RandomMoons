@@ -53,11 +53,15 @@ public class ExploreCommand
 
             // TODO: redo the way the config works below 
 
-            //if (SyncConfig.Synced && SyncConfig.IsClient) { RandomMoons.mls.LogInfo("Config synced with host"); }
+            //if (SyncConfig.Synced && SyncConfig.IsClient) {
+            //  RandomMoons.Logger.LogInfo("Config synced with host");
+            //}
 
             StartOfRound.Instance.ChangeLevelServerRpc(moon.levelID, terminal.groupCredits); // Travel to the chosen moon, at no cost
 
-            if (SyncConfig.AutoStart.Value) { States.startUponArriving = true; } // If AutoStart enabled, tell StartOfRoundPatch to start a level asap
+            // If AutoStart enabled, tell StartOfRoundPatch to start a level asap
+            if (SyncConfig.AutoStart.Value)
+                States.startUponArriving = true;
 
             States.lastVisitedMoon = moon.PlanetName;
             States.isInteracting = false; // End of interaction
