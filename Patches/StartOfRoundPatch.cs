@@ -49,7 +49,7 @@ internal class StartOfRoundPatch
         if (__instance.CanChangeLevels() && States.exploreASAP) // Performs auto explore
         {
             // TODO: redo the way the configs works
-            if (SyncConfig.AutoStart.Value)
+            if (RandomMoons.Config.AutoStart.Value)
                 States.startUponArriving = true;
 
             // If there are more than 0 days left, perform the same as explore command, else travel to Gordion (Company Building)

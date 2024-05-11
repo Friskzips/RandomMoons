@@ -15,12 +15,10 @@ public class TerminalPatch
     // Checks if a player leaved upon confirming explore command
     [HarmonyPatch("QuitTerminal")]
     [HarmonyPrefix]
-    public static void QuitTerminalPatch(Terminal __instance)
+    public static void QuitTerminalPatch()
     {
-        if(States.isInteracting)
-        {
+        if (States.isInteracting)
             States.closedUponConfirmation = true;
-        }
     }
 
     // Checks if the moon selection config entry can be set to MODDED
@@ -28,13 +26,14 @@ public class TerminalPatch
     [HarmonyPrefix]
     public static void BeginUsingTerminalPatch(Terminal __instance)
     {
-        if(SyncConfig.MoonSelectionType.Value == MoonSelection.MODDED)
-        {
-            foreach(SelectableLevel lvl in __instance.moonsCatalogueList) {
-                if(!States.vanillaMoons.Contains(lvl.sceneName)) { return; }
-            }
+        if (RandomMoons.Config.MoonSelectionType.Value != MoonSelection.MODDED)
+            return;
 
-            SyncConfig.MoonSelectionType.Value = MoonSelection.ALL;
+        foreach (SelectableLevel lvl in __instance.moonsCatalogueList) {
+            if (!States.vanillaMoons.Contains(lvl.sceneName)) 
+                return;
         }
+
+        RandomMoons.Config.MoonSelectionType.Value = MoonSelection.ALL;
     }
 }

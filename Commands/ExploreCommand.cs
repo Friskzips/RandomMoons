@@ -19,7 +19,7 @@ public class ExploreCommand
     {
         States.isInteracting = true; // The player will need to confirm / deny
         return new TerminalInteraction() // Starts terminal interaction (confirm / deny)
-            .WithPrompt($"You're going to route to a randomly chosen moon (If you see this, please open an issue on git hub, this is a bug : Value is {SyncConfig.Synced_var.Entry.Value}), for free.\n\nPlease CONFIRM or DENY")
+            .WithPrompt($"You're going to route to a randomly chosen moon (If you see this, please open an issue on git hub, this is a bug : Value is {RandomMoons.Config.SyncedVar}), for free.\n\nPlease CONFIRM or DENY")
             .WithHandler(onInteraction);
     }
 
@@ -39,7 +39,7 @@ public class ExploreCommand
         if (s.ToLower() == "c" || s.ToLower() == "confirm") // If the player confirms the interaction
         {
             // TODO: redo the way the config works below
-            if (States.hasGambled && SyncConfig.RestrictedCommandUsage.Value) // If the ship already explored
+            if (States.hasGambled && RandomMoons.Config.RestrictedCommandUsage.Value) // If the ship already explored
             {
                 return "You have already explored. Please land before exploring once again !";
             }
@@ -49,18 +49,12 @@ public class ExploreCommand
                 return "Please wait before travelling to a new moon !";
             }
 
-            SelectableLevel moon = ChooseRandomMoon(terminal.moonsCatalogueList); // Choose a random moon amongst the moons shown in terminal
-
-            // TODO: redo the way the config works below 
-
-            //if (SyncConfig.Synced && SyncConfig.IsClient) {
-            //  RandomMoons.Logger.LogInfo("Config synced with host");
-            //}
-
-            StartOfRound.Instance.ChangeLevelServerRpc(moon.levelID, terminal.groupCredits); // Travel to the chosen moon, at no cost
+            // Choose a random moon from moons shown in the terminal and travel to it at no cost.
+            SelectableLevel moon = ChooseRandomMoon(terminal.moonsCatalogueList); 
+            StartOfRound.Instance.ChangeLevelServerRpc(moon.levelID, terminal.groupCredits);
 
             // If AutoStart enabled, tell StartOfRoundPatch to start a level asap
-            if (SyncConfig.AutoStart.Value)
+            if (RandomMoons.Config.AutoStart.Value)
                 States.startUponArriving = true;
 
             States.lastVisitedMoon = moon.PlanetName;
@@ -92,7 +86,7 @@ public class ExploreCommand
 
         // TODO: redo the way the config works
 
-        var type = SyncConfig.MoonSelectionType.Value;
+        MoonSelection type = RandomMoons.Config.MoonSelectionType.Value;
 
         // Checks moon selection config entry
         if (type == MoonSelection.VANILLA && !IsMoonVanilla(moons[moonIndex]) || type == MoonSelection.MODDED && IsMoonVanilla(moons[moonIndex]))
@@ -101,11 +95,11 @@ public class ExploreCommand
         }
 
         // Checks the register travels config entry
-        if (SyncConfig.CheckIfVisitedDuringQuota.Value && States.visitedMoons.Contains(moons[moonIndex].PlanetName))
+        if (RandomMoons.Config.CheckIfVisitedDuringQuota.Value && States.visitedMoons.Contains(moons[moonIndex].PlanetName))
         {
             return ChooseRandomMoon(moons);
         }
-            
+
         // Reset visitedMoons list if all the moons have been visited
         if (States.visitedMoons.Count == moons.Length)
         {

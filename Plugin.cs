@@ -36,7 +36,7 @@ public class RandomMoons : BaseUnityPlugin
     private TerminalModRegistry Commands;
 
     internal new static ManualLogSource Logger;
-    public static new SyncConfig Config;
+    public static new RMConfig Config;
 
     // Executed at start
     private void Awake()
