@@ -55,7 +55,7 @@ internal class StartOfRoundPatch
             // If there are more than 0 days left, perform the same as explore command, else travel to Gordion (Company Building)
             if (TimeOfDay.Instance.daysUntilDeadline > 0 || __instance.currentLevelID == States.companyBuildingLevelID)
             {
-                SelectableLevel moon = ExploreCommand.chooseRandomMoon(terminal.moonsCatalogueList);
+                SelectableLevel moon = ExploreCommand.ChooseRandomMoon(terminal.moonsCatalogueList);
                 __instance.ChangeLevelServerRpc(moon.levelID, terminal.groupCredits);
                 States.lastVisitedMoon = moon.PlanetName;
                 States.hasGambled = true;
