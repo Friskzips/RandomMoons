@@ -5,8 +5,6 @@ using CSync.Util;
 using LethalConfig;
 using LethalConfig.ConfigItems;
 using LethalConfig.ConfigItems.Options;
-using LethalSettings.UI;
-using LethalSettings.UI.Components;
 
 namespace RandomMoons.ConfigUtils;
 

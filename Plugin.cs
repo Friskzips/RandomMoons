@@ -29,9 +29,6 @@ public class RandomMoons : BaseUnityPlugin
     // Harmony instance
     readonly Harmony harmony = new(modGUID);
 
-    // Plugin instance
-    static RandomMoons Instance;
-
     // Terminal API Registry Instance
     TerminalModRegistry Commands;
 
@@ -39,19 +36,15 @@ public class RandomMoons : BaseUnityPlugin
     public static new RMConfig Config { get; private set; }
 
     // Executed at start
-    private void Awake()
+    void Awake()
     {
-        // Instantiates the Plugin
-        if (Instance == null)
-            Instance = this;
-
         Logger = base.Logger;
+
         Config = new(base.Config);
+        Config.SyncComplete += CheckSynced;
 
-        // Instantiates the Terminal API Registry
+        // Create Terminal and register our commands.
         Commands = TerminalRegistry.CreateTerminalRegistry();
-
-        // Registers the commands
         Commands.RegisterFrom(new ExploreCommand());
 
         try {
@@ -68,7 +61,7 @@ public class RandomMoons : BaseUnityPlugin
     }
 
     // Apply harmony patches
-    private void ApplyPluginPatches()
+    void ApplyPluginPatches()
     {
         harmony.PatchAll(typeof(RandomMoons));
         Logger.LogInfo("Patched RandomMoons");
@@ -78,5 +71,14 @@ public class RandomMoons : BaseUnityPlugin
 
         harmony.PatchAll(typeof(StartOfRoundPatch));
         Logger.LogInfo("Patched StartOfRound");
+    }
+
+    void CheckSynced(bool success) {
+        if (!success) {
+            Logger.LogDebug("SYNC FAILED");
+            return;
+        }
+
+        Logger.LogDebug($"Commands registered! SyncedVar: {RMConfig.Instance.SyncedVar}");
     }
 }
