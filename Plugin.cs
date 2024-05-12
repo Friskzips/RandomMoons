@@ -27,16 +27,16 @@ public class RandomMoons : BaseUnityPlugin
     internal const string modVersion = "1.3.0";
 
     // Harmony instance
-    private readonly Harmony harmony = new(modGUID);
+    readonly Harmony harmony = new(modGUID);
 
     // Plugin instance
-    private static RandomMoons Instance;
+    static RandomMoons Instance;
 
     // Terminal API Registry Instance
-    private TerminalModRegistry Commands;
+    TerminalModRegistry Commands;
 
-    internal new static ManualLogSource Logger;
-    public static new RMConfig Config;
+    internal static new ManualLogSource Logger;
+    public static new RMConfig Config { get; private set; }
 
     // Executed at start
     private void Awake()
@@ -64,7 +64,7 @@ public class RandomMoons : BaseUnityPlugin
         }
 
         // Plugin loaded!
-        Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded and operational ! Have fun");
+        Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded and operational. Have fun!");
     }
 
     // Apply harmony patches

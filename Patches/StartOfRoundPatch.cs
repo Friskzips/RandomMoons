@@ -41,10 +41,10 @@ internal class StartOfRoundPatch
         }
 
         // Performs auto start
-        if (!__instance.travellingToNewLevel && States.confirmedAutostart)
-        {
+        //if (!__instance.travellingToNewLevel && States.confirmedAutostart)
+        //{
                 
-        }
+        //}
 
         if (__instance.CanChangeLevels() && States.exploreASAP) // Performs auto explore
         {
