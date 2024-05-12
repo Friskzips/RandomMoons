@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using BepInEx.Logging;
+using CSync;
 using LethalAPI.LibTerminal.Attributes;
 using LethalAPI.LibTerminal.Interactions;
 using LethalAPI.LibTerminal.Interfaces;
@@ -95,12 +97,14 @@ public class ExploreCommand
         var type = SyncConfig.MoonSelectionType.Value;
 
         // Checks moon selection config entry
+        // if the config wants vanilla and random is not then recursiv           if the config wants modded and random is vanilla then recursiv
         if (type == MoonSelection.VANILLA && !IsMoonVanilla(moons[moonIndex]) || type == MoonSelection.MODDED && IsMoonVanilla(moons[moonIndex]))
         {
             return ChooseRandomMoon(moons);
         }
 
         // Checks the register travels config entry
+        //if CheckIfVisitedDuringQuota is true and selected moon is in visitedMoons then recursiv
         if (SyncConfig.CheckIfVisitedDuringQuota.Value && States.visitedMoons.Contains(moons[moonIndex].PlanetName))
         {
             return ChooseRandomMoon(moons);
