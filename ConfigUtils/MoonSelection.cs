@@ -8,7 +8,7 @@ namespace RandomMoons.ConfigUtils;
 [DataContract]
 public enum MoonSelection
 {
-    [EnumMember] ALL,
-    [EnumMember] MODDED,
-    [EnumMember] VANILLA
+    [EnumMember] ALL,       //All the moons
+    [EnumMember] MODDED,    //Only Moddeds moons
+    [EnumMember] VANILLA,   //Only Vanilla moons
 }

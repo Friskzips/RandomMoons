@@ -6,6 +6,7 @@ using LethalConfig;
 using LethalConfig.ConfigItems;
 using LethalConfig.ConfigItems.Options;
 
+
 namespace RandomMoons.ConfigUtils;
 
 [DataContract]
@@ -75,12 +76,5 @@ public class RMConfig : SyncedConfig<RMConfig>
             new ConfigDescription("Please be synced for the love of god")
         );
 
-        var SyncedVarInput = new IntSliderConfigItem(SyncedVar.Entry, new IntSliderOptions{
-            RequiresRestart = false,
-            Min = 0,
-            Max = 100
-        });
-
-        LethalConfigManager.AddConfigItem(SyncedVarInput);
+        }
     }
-}

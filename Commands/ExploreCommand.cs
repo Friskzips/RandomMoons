@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using BepInEx.Logging;
+using CSync;
 using LethalAPI.LibTerminal.Attributes;
 using LethalAPI.LibTerminal.Interactions;
 using LethalAPI.LibTerminal.Interfaces;
@@ -89,6 +91,7 @@ public class ExploreCommand
         MoonSelection type = RandomMoons.Config.MoonSelectionType.Value;
 
         // Checks moon selection config entry
+        // if the config wants vanilla and random is not then recursiv           if the config wants modded and random is vanilla then recursiv
         if (type == MoonSelection.VANILLA && !IsMoonVanilla(moons[moonIndex]) || type == MoonSelection.MODDED && IsMoonVanilla(moons[moonIndex]))
         {
             return ChooseRandomMoon(moons);

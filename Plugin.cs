@@ -1,6 +1,7 @@
 ﻿using System;
 using BepInEx;
 using BepInEx.Logging;
+using CSync;
 using HarmonyLib;
 using LethalAPI.LibTerminal;
 using LethalAPI.LibTerminal.Models;
