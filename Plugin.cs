@@ -9,6 +9,7 @@ using LethalConfig;
 using RandomMoons.Commands;
 using RandomMoons.ConfigUtils;
 using RandomMoons.Patches;
+using RandomMoons.Utils;
 
 namespace RandomMoons;
 
@@ -47,6 +48,7 @@ public class RandomMoons : BaseUnityPlugin
         // Create Terminal and register our commands.
         Commands = TerminalRegistry.CreateTerminalRegistry();
         Commands.RegisterFrom(new ExploreCommand());
+        Commands.RegisterFrom(new DisplayConfigCommand());
 
         try {
             Logger.LogInfo("Applying patches...");
@@ -76,7 +78,15 @@ public class RandomMoons : BaseUnityPlugin
 
     void CheckSynced(bool success) {
         if (!success) {
-            Logger.LogDebug("SYNC FAILED");
+            Logger.LogWarning("SYNC FAILED");
+            States.ConfigStatus = false;
+            return;
+
+        }
+        if (success)
+        {
+            Logger.LogInfo("Sync Succesfull ! Have fun !");
+            States.ConfigStatus = true;
             return;
         }
 

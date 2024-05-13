@@ -15,6 +15,9 @@ internal class States
     public static bool exploreASAP = false; // If the ship should travel to a random moon upon finishing leaving the current level
     public static List<string> visitedMoons = []; // Lists the moons visited by exploring during the current quota
 
+    //Config stuff
+    public static bool ConfigStatus;
+
     // TODO: Add new moons added with V50. All vanilla moons scene names 
     public static readonly string[] vanillaMoons = { 
         "Level1Experimentation", "Level2Assurance", "Level3Vow", "Level4March", "Level5Rend", "Level6Dine", "Level7Offense", "Level8Titan" 

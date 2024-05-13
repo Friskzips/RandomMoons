@@ -13,10 +13,13 @@ namespace RandomMoons.Commands;
 /// <summary>
 /// The main command, explore
 /// </summary>
+/// 
+
 public class ExploreCommand
 {
     // When explore is typed in the terminal
     [TerminalCommand("explore"), CommandInfo("Let you travel to a random moon for free !")]
+
     public ITerminalInteraction exec(Terminal terminal)
     {
         States.isInteracting = true; // The player will need to confirm / deny
