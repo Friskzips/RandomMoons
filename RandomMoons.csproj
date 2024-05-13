@@ -18,9 +18,8 @@
     <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all" />
     <PackageReference Include="BepInEx.Core" Version="5.*" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
-    <PackageReference Include="Owen3H.BepInEx.CSync" Version="3.0.0" />
+    <PackageReference Include="Owen3H.BepInEx.CSync" Version="3.*" />
     <PackageReference Include="UnityEngine.Modules" Version="2022.3.9" IncludeAssets="compile" />
-    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.1" PrivateAssets="all" />
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
@@ -28,41 +27,29 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\BepInEx\core\0Harmony.dll</HintPath>
-    </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="BepInEx">
       <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\BepInEx\core\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="LethalAPI.Terminal">
-      <HintPath>..\..\..\..\DEPENDENCIES\LethalAPI.Terminal.dll</HintPath>
+      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\BepInEx\plugins\LethalAPI.Terminal.dll</HintPath>
     </Reference>
     <Reference Include="LethalConfig">
-      <HintPath>..\..\..\..\DEPENDENCIES\LethalConfig.dll</HintPath>
-    </Reference>
-    <Reference Include="LethalSettings">
-      <HintPath>..\..\..\..\DEPENDENCIES\LethalSettings.dll</HintPath>
+      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\BepInEx\plugins\LethalConfig.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Collections">
-      <HintPath>..\..\..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.Collections.dll</HintPath>
+      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Netcode.Runtime">
-      <HintPath>..\..\..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.Netcode.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\Unity.Netcode.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\Lethal Company\Lethal Company_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

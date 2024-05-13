@@ -28,31 +28,24 @@ public class RandomMoons : BaseUnityPlugin
     internal const string modVersion = "1.3.0";
 
     // Harmony instance
-    private readonly Harmony harmony = new(modGUID);
-
-    // Plugin instance
-    private static RandomMoons Instance;
+    readonly Harmony harmony = new(modGUID);
 
     // Terminal API Registry Instance
-    private TerminalModRegistry Commands;
+    TerminalModRegistry Commands;
 
-    internal new static ManualLogSource Logger;
-    public static new SyncConfig Config;
+    internal static new ManualLogSource Logger;
+    public static new RMConfig Config { get; private set; }
 
     // Executed at start
-    private void Awake()
+    void Awake()
     {
-        // Instantiates the Plugin
-        if (Instance == null)
-            Instance = this;
-
         Logger = base.Logger;
+
         Config = new(base.Config);
+        Config.SyncComplete += CheckSynced;
 
-        // Instantiates the Terminal API Registry
+        // Create Terminal and register our commands.
         Commands = TerminalRegistry.CreateTerminalRegistry();
-
-        // Registers the commands
         Commands.RegisterFrom(new ExploreCommand());
 
         try {
@@ -65,11 +58,11 @@ public class RandomMoons : BaseUnityPlugin
         }
 
         // Plugin loaded!
-        Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded and operational ! Have fun");
+        Logger.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded and operational. Have fun!");
     }
 
     // Apply harmony patches
-    private void ApplyPluginPatches()
+    void ApplyPluginPatches()
     {
         harmony.PatchAll(typeof(RandomMoons));
         Logger.LogInfo("Patched RandomMoons");
@@ -79,5 +72,14 @@ public class RandomMoons : BaseUnityPlugin
 
         harmony.PatchAll(typeof(StartOfRoundPatch));
         Logger.LogInfo("Patched StartOfRound");
+    }
+
+    void CheckSynced(bool success) {
+        if (!success) {
+            Logger.LogDebug("SYNC FAILED");
+            return;
+        }
+
+        Logger.LogDebug($"Commands registered! SyncedVar: {RMConfig.Instance.SyncedVar}");
     }
 }
