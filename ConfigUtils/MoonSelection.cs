@@ -1,15 +1,14 @@
 ﻿using System.Runtime.Serialization;
 
-namespace RandomMoons.ConfigUtils
+namespace RandomMoons.ConfigUtils;
+
+/// <summary>
+/// Possible values for the MoonSelection config entry
+/// </summary>
+[DataContract]
+public enum MoonSelection
 {
-    /// <summary>
-    /// Possible values for the MoonSelection config entry
-    /// </summary>
-    [DataContract]
-    public enum MoonSelection
-    {
-        [EnumMember] ALL,
-        [EnumMember] MODDED,
-        [EnumMember] VANILLA
-    }
+    [EnumMember] ALL,       //All the moons
+    [EnumMember] MODDED,    //Only Moddeds moons
+    [EnumMember] VANILLA,   //Only Vanilla moons
 }
