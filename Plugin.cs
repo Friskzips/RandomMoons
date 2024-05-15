@@ -48,7 +48,7 @@ public class RandomMoons : BaseUnityPlugin
         // Create Terminal and register our commands.
         Commands = TerminalRegistry.CreateTerminalRegistry();
         Commands.RegisterFrom(new ExploreCommand());
-        Commands.RegisterFrom(new DisplayConfigCommand());
+        //Commands.RegisterFrom(new DisplayConfigCommand());
 
         try {
             Logger.LogInfo("Applying patches...");
