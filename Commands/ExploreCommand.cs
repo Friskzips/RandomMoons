@@ -24,7 +24,7 @@ public class ExploreCommand
     {
         States.isInteracting = true; // The player will need to confirm / deny
         return new TerminalInteraction() // Starts terminal interaction (confirm / deny)
-            .WithPrompt($"You're going to route to a randomly chosen moon (If you see this, please open an issue on GitHub, this is a bug : Value is {RMConfig.Instance.SyncedVar}), for free.\n\nPlease CONFIRM or DENY")
+            .WithPrompt($"You're going to route to a randomly chosen moon, for free.\n\nPlease CONFIRM or DENY")
             .WithHandler(onInteraction);
     }
 

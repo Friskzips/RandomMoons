@@ -66,9 +66,9 @@ public class RMConfig : SyncedConfig<RMConfig>
         );
             
         SyncedVar = cfg.BindSyncedEntry(
-            new ConfigDefinition("Please work", "Please work2"),
+            new ConfigDefinition("Debug leftover", "DebuG leftover"),
             4,
-            new ConfigDescription("Please be synced for the love of god")
+            new ConfigDescription("This is a debug variable, you can ignore it")
         );
 
         var AutoStart_input = new BoolCheckBoxConfigItem(AutoStart.Entry, new BoolCheckBoxOptions
@@ -99,6 +99,7 @@ public class RMConfig : SyncedConfig<RMConfig>
         LethalConfigManager.AddConfigItem(CheckIfVisitedDuringQuota_input);
         LethalConfigManager.AddConfigItem(RestrictedCommandUsage_input);
         LethalConfigManager.AddConfigItem(moonSelectionType_input);
+        LethalConfigManager.SkipAutoGenFor(SyncedVar.Entry);
 
     }
     }
